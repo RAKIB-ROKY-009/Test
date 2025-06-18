@@ -28,8 +28,8 @@
     }
 
     h1 {
-      font-size: 2.2rem;
-      margin-bottom: 20px;
+      font-size: 2rem;
+      margin: 10px 0;
       text-shadow: 0 0 10px #0f0;
       color: #00ff99;
     }
@@ -69,9 +69,17 @@
     p strong {
       color: #00ffcc;
     }
+
+    .logo {
+      max-width: 200px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 0 15px #0f0);
+    }
   </style>
 </head>
 <body>
+  <img src="logo.png" alt="ROCKY VIP TOOL Logo" class="logo">
   <h1>ROCKY VIP TOOL</h1>
   <div class="container">
     <div id="userInfo">
@@ -86,7 +94,6 @@
   </div>
 
   <script>
-    // Load user (localStorage fallback system)
     let userUid = localStorage.getItem('uid') || "rocky_user";
     let coins = parseInt(localStorage.getItem('coins')) || 10;
 
