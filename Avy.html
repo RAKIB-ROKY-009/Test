@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Aviator Signal Generator</title>
@@ -11,17 +10,13 @@
     .result { margin-top: 20px; font-size: 20px; color: #00ff88; }
   </style>
 </head>
-<body>
-
-  <h1>Aviator Signal Generator</h1>
+<body>  <h1>Aviator Signal Generator</h1>
   <p>Enter previous multipliers (comma separated):</p>
   <input type="text" id="inputData" placeholder="Example: 1.2, 1.3, 50.4, 1.9, 2.3">
   <br>
-  <button onclick="checkSignal()">Generate Signal</button>
-
-  <div class="result" id="resultBox"></div>
-
-  <script>
+  <button onclick="checkSignal()">Generate Signal</button>  <div class="result" id="resultBox"></div>
+  <div class="result" id="countdownBox"></div>
+  <div class="result" id="predictionBox"></div>  <script>
     function checkSignal() {
       const input = document.getElementById('inputData').value;
       const multipliers = input.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
@@ -34,20 +29,30 @@
         }
       }
 
-      const sinceLastBig = lastBigIndex === -1 ? multipliers.length : multipliers.length - 1 - lastBigIndex;
+      const totalRounds = multipliers.length;
+      const sinceLastBig = lastBigIndex === -1 ? totalRounds : totalRounds - 1 - lastBigIndex;
 
       let signal = '';
+      let estimate = '';
+      let predictedMultiplier = '';
+
       if (sinceLastBig > 30) {
         signal = '🔴 Big multiplier expected very soon!';
+        estimate = '⏳ Estimated next big x in 1–3 rounds (~30–60 seconds)';
+        predictedMultiplier = '📈 Predicted: ~60x – 120x';
       } else if (sinceLastBig > 15) {
         signal = '🟠 Medium chance for big multiplier.';
+        estimate = '⏳ Possibly in next 5–10 rounds (~2–3 minutes)';
+        predictedMultiplier = '📈 Predicted: ~20x – 50x';
       } else {
         signal = '🟢 Normal zone. Low chance for big x.';
+        estimate = '✅ Just play safe. No signal expected.';
+        predictedMultiplier = '📈 Predicted: ~1.5x – 5x';
       }
 
       document.getElementById('resultBox').textContent = signal;
+      document.getElementById('countdownBox').textContent = estimate;
+      document.getElementById('predictionBox').textContent = predictedMultiplier;
     }
-  </script>
-
-</body>
+  </script></body>
 </html>
