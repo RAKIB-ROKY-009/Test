@@ -84,7 +84,7 @@
   <div class="container">
     <div id="userInfo">
       <p><strong>UID:</strong> <span id="uidDisplay"></span></p>
-      <p><strong>Coins:</strong> <span id="coinsDisplay"></span></p>
+      <p><strong>Coins:</strong> <span id="coinsDisplay">Unlimited ♾️</span></p>
     </div>
 
     <input type="text" id="periodNumber" placeholder="Enter 3-digit period number" />
@@ -95,23 +95,13 @@
 
   <script>
     let userUid = localStorage.getItem('uid') || "rocky_user";
-    let coins = parseInt(localStorage.getItem('coins')) || 10;
-
     document.getElementById('uidDisplay').textContent = userUid;
-    document.getElementById('coinsDisplay').textContent = coins;
 
     function getPrediction() {
       const period = document.getElementById('periodNumber').value.trim();
       if (!/^\d{3}$/.test(period)) {
         return alert("Please enter a valid 3-digit period number!");
       }
-      if (coins <= 0) {
-        return alert("You don't have enough coins.");
-      }
-
-      coins -= 1;
-      localStorage.setItem('coins', coins);
-      document.getElementById('coinsDisplay').textContent = coins;
 
       const prediction = Math.random() > 0.5 ? "BIG" : "SMALL";
       const timestamp = new Date().toLocaleTimeString();
