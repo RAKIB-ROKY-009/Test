@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Aviator Signal Generator</title>
+  <style>
+    body { background: #111; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
+    input, button { padding: 10px; font-size: 16px; border-radius: 6px; margin: 10px; border: none; }
+    input { width: 80%; max-width: 400px; }
+    button { background: #ff4747; color: white; cursor: pointer; }
+    .result { margin-top: 20px; font-size: 20px; color: #00ff88; }
+  </style>
+</head>
+<body>
+
+  <h1>Aviator Signal Generator</h1>
+  <p>Enter previous multipliers (comma separated):</p>
+  <input type="text" id="inputData" placeholder="Example: 1.2, 1.3, 50.4, 1.9, 2.3">
+  <br>
+  <button onclick="checkSignal()">Generate Signal</button>
+
+  <div class="result" id="resultBox"></div>
+
+  <script>
+    function checkSignal() {
+      const input = document.getElementById('inputData').value;
+      const multipliers = input.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
+
+      let lastBigIndex = -1;
+      for (let i = multipliers.length - 1; i >= 0; i--) {
+        if (multipliers[i] >= 50) {
+          lastBigIndex = i;
+          break;
+        }
+      }
+
+      const sinceLastBig = lastBigIndex === -1 ? multipliers.length : multipliers.length - 1 - lastBigIndex;
+
+      let signal = '';
+      if (sinceLastBig > 30) {
+        signal = '🔴 Big multiplier expected very soon!';
+      } else if (sinceLastBig > 15) {
+        signal = '🟠 Medium chance for big multiplier.';
+      } else {
+        signal = '🟢 Normal zone. Low chance for big x.';
+      }
+
+      document.getElementById('resultBox').textContent = signal;
+    }
+  </script>
+
+</body>
+</html>
