@@ -3,29 +3,47 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ASHURA VIP TOOL (Offline)</title>
+  <title>ROCKY VIP TOOL</title>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
   <style>
     body {
-      background: #000;
-      color: #0f0;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
       font-family: 'Share Tech Mono', monospace;
+      background: linear-gradient(135deg, #000000, #001f1f, #003333);
+      background-size: 600% 600%;
+      animation: gradientBG 15s ease infinite;
+      color: #0f0;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      height: 100vh;
     }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     h1 {
-      font-size: 2rem;
+      font-size: 2.2rem;
       margin-bottom: 20px;
       text-shadow: 0 0 10px #0f0;
+      color: #00ff99;
     }
+
     .container {
       width: 90%;
       max-width: 400px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #0f0;
       text-align: center;
     }
+
     input, button {
       padding: 10px;
       margin: 10px 0;
@@ -36,17 +54,25 @@
       border-radius: 5px;
       font-size: 1rem;
     }
+
     button:hover {
       background: #0c0;
+      cursor: pointer;
     }
+
     .result {
       margin-top: 15px;
       font-size: 1.2rem;
+      color: #00ff99;
+    }
+
+    p strong {
+      color: #00ffcc;
     }
   </style>
 </head>
 <body>
-  <h1>ASHURA VIP TOOL</h1>
+  <h1>ROCKY VIP TOOL</h1>
   <div class="container">
     <div id="userInfo">
       <p><strong>UID:</strong> <span id="uidDisplay"></span></p>
@@ -61,7 +87,7 @@
 
   <script>
     // Load user (localStorage fallback system)
-    let userUid = localStorage.getItem('uid') || "demoUser";
+    let userUid = localStorage.getItem('uid') || "rocky_user";
     let coins = parseInt(localStorage.getItem('coins')) || 10;
 
     document.getElementById('uidDisplay').textContent = userUid;
